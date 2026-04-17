@@ -11,17 +11,11 @@ Agencer shared packages consumed by OperativeX, Operative2, and future operative
 
 ## Install
 
-These packages publish to GitHub Packages under the `@agencer` scope.
+These packages publish to the public npm registry under the `@agencer` scope.
 
 ```bash
-# .npmrc in your project
-@agencer:registry=https://npm.pkg.github.com
-
-# Install
 npm install @agencer/voice-infrastructure @agencer/total-recall @agencer/ui-primitives @agencer/deferred-tools-registry
 ```
-
-A valid `NODE_AUTH_TOKEN` (GitHub PAT with `read:packages`) is required.
 
 ## Protocol
 

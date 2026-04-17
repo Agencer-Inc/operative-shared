@@ -1,4 +1,4 @@
-name: Publish to GitHub Packages
+name: Publish to npmjs
 
 on:
   push:
@@ -8,15 +8,12 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: "20"
-          registry-url: "https://npm.pkg.github.com"
+          registry-url: "https://registry.npmjs.org"
           scope: "@agencer"
       - uses: pnpm/action-setup@v3
         with:
@@ -26,7 +23,7 @@ jobs:
       - name: Publish all packages
         run: |
           for pkg in voice-infrastructure total-recall ui-primitives deferred-tools-registry; do
-            cd packages/$pkg && npm publish && cd ../..
+            cd packages/$pkg && npm publish --access public && cd ../..
           done
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
