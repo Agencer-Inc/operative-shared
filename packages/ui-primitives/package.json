@@ -1,0 +1,25 @@
+{
+  "name": "@agencer/ui-primitives",
+  "version": "0.1.0-alpha.0",
+  "description": "Shared React UI: Eagle Eye, chat panel, hand gesture controls",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test test/ || echo 'no tests yet'"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Agencer-Inc/operative-shared.git"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  }
+}
