@@ -22,8 +22,16 @@ jobs:
       - run: pnpm -r build
       - name: Publish all packages
         run: |
-          for pkg in voice-infrastructure total-recall ui-primitives deferred-tools-registry; do
-            cd packages/$pkg && npm publish --access public && cd ../..
+          PUBLISHED=0
+          for pkg in voice-infrastructure total-recall ui-primitives deferred-tools-registry usage-accountant; do
+            echo "--- publishing @agencer/$pkg ---"
+            (cd packages/$pkg && npm publish --access public --tag alpha) && PUBLISHED=$((PUBLISHED + 1)) || echo "  (skipped — likely already published at this version)"
           done
+          echo "---"
+          echo "Successfully published: $PUBLISHED package(s)"
+          if [ "$PUBLISHED" -eq 0 ]; then
+            echo "ERROR: nothing was published. Failing the run."
+            exit 1
+          fi
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
