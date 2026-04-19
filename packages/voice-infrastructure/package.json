@@ -1,25 +1,45 @@
 {
   "name": "@agencer/voice-infrastructure",
-  "version": "0.1.0-alpha.0",
-  "description": "Voice pipeline primitives: LiveKit, Deepgram, Cartesia, SSML transforms",
+  "version": "0.1.0-alpha.1",
+  "description": "Black-box voice pipeline: LiveKit rooms, Deepgram STT, Cartesia TTS, Silero VAD. One install, full voice stack.",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
-    "test": "node --test test/ || echo 'no tests yet'"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
+  "dependencies": {
+    "@livekit/agents": "^1.2.1",
+    "@livekit/agents-plugin-cartesia": "^1.2.1",
+    "@livekit/agents-plugin-deepgram": "^1.2.1",
+    "@livekit/agents-plugin-silero": "^1.2.1",
+    "@livekit/rtc-node": "^0.13.0",
+    "livekit-server-sdk": "^2.15.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "vitest": "^1.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Agencer-Inc/operative-shared.git"
   },
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "typescript": "^5.5.0"
-  }
+  "license": "Apache-2.0"
 }
