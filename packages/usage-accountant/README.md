@@ -62,6 +62,25 @@ console.log(breakdown);
 // [{ component: "soft_logic.fact_recall", totalInputTokens: 500, ... }]
 ```
 
+## Configuration
+
+### Environment variables
+
+| Variable | Required? | Default | Description |
+|----------|-----------|---------|-------------|
+| `OX_USER_ID` | **Yes** | `"default"` | The user ID attributed to every `usage_ledger` record created via `defaultUserContext()`. Set this to the stable user identifier for the operative's operator **before first run**. If unset, all records are attributed to `"default"`, which splits billing history across users and makes per-user cost queries meaningless. Changing it later means prior records remain attributed to the previous value. |
+
+```bash
+# Shell profile, or .env if your app loads dotenv
+export OX_USER_ID="faryar"
+```
+
+> `ANTHROPIC_API_KEY` is **not** read from the environment by this package. It is passed explicitly as the `apiKey` parameter to `callHaikuMetered()`.
+
+## Gotchas
+
+- **`userId='default'` in your ledger?** `OX_USER_ID` was not set when `defaultUserContext()` was called. There is no automatic rekey. Records written with the old value stay attributed to that value. Set the variable, and only new records will use the corrected ID.
+
 ## API
 
 ### `runMigrations(db: Database)`
