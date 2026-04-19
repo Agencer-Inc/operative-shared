@@ -1,25 +1,55 @@
 {
   "name": "@agencer/total-recall",
-  "version": "0.1.0-alpha.0",
-  "description": "Memory engine: SQLite+FTS5, pgvector, episodic and semantic recall",
+  "version": "0.1.0",
+  "description": "Memory engine: SQLite+FTS5, pgvector, episodic and semantic recall, Haiku-driven fact extraction with critic pass",
   "type": "module",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": ["dist"],
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
-    "test": "node --test test/ || echo 'no tests yet'"
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
     "access": "public"
   },
+  "dependencies": {
+    "@agencer/usage-accountant": "workspace:*",
+    "@anthropic-ai/sdk": "^0.30.0"
+  },
+  "peerDependencies": {
+    "better-sqlite3": ">=9.0.0",
+    "pg": ">=8.0.0",
+    "pino": ">=8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "pg": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "@types/pg": "^8.20.0",
+    "better-sqlite3": "^11.0.0",
+    "pino": "^9.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^1.4.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Agencer-Inc/operative-shared.git"
   },
-  "license": "Apache-2.0",
-  "devDependencies": {
-    "typescript": "^5.5.0"
-  }
+  "license": "Apache-2.0"
 }

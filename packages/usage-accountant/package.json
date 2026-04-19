@@ -1,7 +1,7 @@
 {
   "name": "@agencer/usage-accountant",
-  "version": "0.1.0-alpha.0",
-  "description": "Metering, per-user attribution, and named sub-meters for Agencer products.",
+  "version": "0.1.0",
+  "description": "Per-call cost attribution with named sub-meters. Every API call that costs money is recorded with component, model, token counts, and latency.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,7 +21,22 @@
     "access": "public",
     "registry": "https://registry.npmjs.org"
   },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0"
+  },
+  "peerDependencies": {
+    "better-sqlite3": ">=9.0.0",
+    "pino": ">=8.0.0"
+  },
+  "peerDependenciesMeta": {
+    "pino": {
+      "optional": false
+    }
+  },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "better-sqlite3": "^11.0.0",
+    "pino": "^9.0.0",
     "typescript": "^5.4.0",
     "vitest": "^1.4.0"
   },
