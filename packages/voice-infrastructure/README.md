@@ -164,7 +164,7 @@ returns an SSE stream of text chunks.
 ```bash
 npm run build      # TypeScript compilation
 npm run typecheck   # Type checking without emit
-npm test           # Run all 111 tests
+npm test           # Run all 115 tests
 ```
 
 ## License
