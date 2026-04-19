@@ -1,6 +1,6 @@
 {
   "name": "@agencer/total-recall",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Memory engine: SQLite+FTS5, pgvector, episodic and semantic recall, Haiku-driven fact extraction with critic pass",
   "type": "module",
   "main": "./dist/index.js",
@@ -26,7 +26,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@agencer/usage-accountant": "workspace:*",
+    "@agencer/usage-accountant": "0.1.0",
     "@anthropic-ai/sdk": "^0.30.0"
   },
   "peerDependencies": {
