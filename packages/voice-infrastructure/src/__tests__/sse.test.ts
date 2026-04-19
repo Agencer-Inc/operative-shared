@@ -17,7 +17,7 @@ function mockRes() {
     headers,
     setHeader(key: string, value: string) { headers[key] = value; },
     flushHeaders() { /* noop */ },
-    write(data: string) { chunks.push(data); },
+    write(data: string) { chunks.push(data); return true; },
     end() { chunks.push("__END__"); },
   } satisfies SSEWritable & { chunks: string[]; headers: Record<string, string> };
 }
