@@ -11,7 +11,11 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "test": "vitest run",
@@ -22,13 +26,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@agencer/usage-accountant": "0.1.0",
+    "@agencer/usage-accountant": "workspace:*",
     "@anthropic-ai/sdk": "^0.30.0"
   },
   "peerDependencies": {
     "better-sqlite3": ">=9.0.0",
-    "pino": ">=8.0.0",
-    "pg": ">=8.0.0"
+    "pg": ">=8.0.0",
+    "pino": ">=8.0.0"
   },
   "peerDependenciesMeta": {
     "pg": {
@@ -37,6 +41,7 @@
   },
   "devDependencies": {
     "@types/better-sqlite3": "^7.6.0",
+    "@types/pg": "^8.20.0",
     "better-sqlite3": "^11.0.0",
     "pino": "^9.0.0",
     "typescript": "^5.5.0",

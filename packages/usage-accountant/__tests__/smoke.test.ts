@@ -1,18 +1,19 @@
 import { describe, it, expect } from "vitest";
-import { PACKAGE_VERSION, SUB_METERS } from "../src/index.js";
+import { PACKAGE_VERSION, UsageComponent } from "../src/index.js";
 
 describe("@agencer/usage-accountant", () => {
   it("exports the correct PACKAGE_VERSION", () => {
-    expect(PACKAGE_VERSION).toBe("@agencer/usage-accountant/0.1.0-alpha.0");
+    expect(PACKAGE_VERSION).toBe("0.1.0");
   });
 
-  it("exports SUB_METERS as a non-empty array", () => {
-    expect(SUB_METERS.length).toBeGreaterThan(0);
+  it("exports UsageComponent with known sub-meters", () => {
+    expect(UsageComponent.BRAIN_OPUS).toBe("brain.opus");
+    expect(UsageComponent.TTS_CARTESIA).toBe("voice.tts_cartesia");
+    expect(UsageComponent.FACT_RECALL).toBe("soft_logic.fact_recall");
   });
 
-  it("includes known sub-meters", () => {
-    expect(SUB_METERS).toContain("BRAIN_OPUS");
-    expect(SUB_METERS).toContain("TTS_CARTESIA");
-    expect(SUB_METERS).toContain("FACT_RECALL");
+  it("UsageComponent has at least 10 sub-meters", () => {
+    const keys = Object.keys(UsageComponent);
+    expect(keys.length).toBeGreaterThanOrEqual(10);
   });
 });
