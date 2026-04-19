@@ -49,6 +49,26 @@ export async function* parseSSEStream(
         }
       }
     }
+
+    // Process any remaining data left in the buffer after EOF.
+    // This handles the case where the upstream closes without a trailing newline.
+    const remaining = buffer.trim();
+    if (remaining && remaining.startsWith("data: ")) {
+      const data = remaining.slice(6);
+      if (data !== "[DONE]") {
+        try {
+          const parsed = JSON.parse(data) as {
+            choices?: Array<{ delta?: { content?: string } }>;
+          };
+          const content = parsed?.choices?.[0]?.delta?.content;
+          if (content) {
+            yield content;
+          }
+        } catch {
+          // Malformed JSON chunk -- skip
+        }
+      }
+    }
   } finally {
     reader.releaseLock();
   }

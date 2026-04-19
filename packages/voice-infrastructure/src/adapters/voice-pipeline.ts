@@ -19,6 +19,8 @@ import type { BrainAdapter } from "../types.js";
  * The BrainAdapter can be an HTTP endpoint, a local function, or anything
  * that returns an async generator of text chunks.
  */
+const MAX_CONVERSATION_HISTORY = 20;
+
 class BrainAgent extends voice.Agent {
   private conversationHistory: Array<{ role: string; content: string }> = [];
   private brainAdapter: BrainAdapter;
@@ -49,6 +51,13 @@ class BrainAgent extends voice.Agent {
 
     this.conversationHistory.push({ role: "user", content: userText });
 
+    // Trim to avoid unbounded memory/token growth in long sessions
+    if (this.conversationHistory.length > MAX_CONVERSATION_HISTORY) {
+      this.conversationHistory = this.conversationHistory.slice(
+        -MAX_CONVERSATION_HISTORY,
+      );
+    }
+
     const generator = this.brainAdapter.chat([...this.conversationHistory]);
     const history = this.conversationHistory;
     let fullResponse = "";
@@ -67,6 +76,9 @@ class BrainAgent extends voice.Agent {
           fullResponse += value;
           controller.enqueue(value);
         } catch {
+          if (fullResponse) {
+            history.push({ role: "assistant", content: fullResponse });
+          }
           controller.close();
         }
       },
