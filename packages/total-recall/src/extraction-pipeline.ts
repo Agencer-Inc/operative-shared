@@ -101,10 +101,12 @@ export class ExtractionPipeline {
   private enqueue(task: () => Promise<void>): void {
     if (this.activeExtractions < MAX_CONCURRENT_EXTRACTIONS) {
       this.activeExtractions++;
-      task().finally(() => {
-        this.activeExtractions--;
-        this.drainQueue();
-      });
+      task()
+        .catch((err) => this.logger.error({ err }, "Extraction task failed"))
+        .finally(() => {
+          this.activeExtractions--;
+          this.drainQueue();
+        });
     } else if (this.queue.length < MAX_QUEUE_SIZE) {
       this.queue.push(task);
     } else {
@@ -119,10 +121,12 @@ export class ExtractionPipeline {
       const next = this.queue.shift();
       if (next) {
         this.activeExtractions++;
-        next().finally(() => {
-          this.activeExtractions--;
-          this.drainQueue();
-        });
+        next()
+          .catch((err) => this.logger.error({ err }, "Extraction task failed"))
+          .finally(() => {
+            this.activeExtractions--;
+            this.drainQueue();
+          });
       }
     }
   }
