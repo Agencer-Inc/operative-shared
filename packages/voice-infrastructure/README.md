@@ -1,5 +1,5 @@
 # @agencer/voice-infrastructure
 
-Voice pipeline primitives for Agencer operatives. Wraps LiveKit rooms, Deepgram STT streaming, Cartesia TTS, and SSML transforms into a single consistent interface used by OperativeX and Operative2.
+Black-box voice pipeline for Agencer operatives. One install, full voice stack.
 
-Content coming in 0.2.0 — this is a scaffold release.
+Content populating in this branch — see commits for progress.
